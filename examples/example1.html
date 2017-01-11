@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div id="root"></div>
+    <script src="../node_modules/react/dist/react.js"></script>
+    <script src="../node_modules/react-dom/dist/react-dom.js"></script>
+    <script src="../dist/debut.js"></script>
+    <script>
+      function MyComponent({ text }) {
+        return React.createElement('span', null, text);
+      }
+
+      const component = debut.component.createComponent({
+        component: MyComponent,
+        initialState: { text: 'hi' },
+        children: [ ],
+      });
+
+      ReactDOM.render(React.createElement(debut.ViewComponent, component), document.getElementById('root'));
+
+      const actions = [
+        [ { state$: component.state$, reducer: () => ({ text: 'Goodbye' }) } ]
+      ]
+
+      const actionQueue = new debut.ActionQueue(actions);
+
+      setTimeout(() => { actionQueue.next() }, 500);
+      setTimeout(() => { actionQueue.previous() }, 1000);
+    </script>
+  </body>
+</html>
