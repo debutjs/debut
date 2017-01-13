@@ -1,15 +1,14 @@
 import { Component, pushStateToComponent } from 'src/view/component';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-
 interface StateReducer<P> {
   state$: BehaviorSubject<P>,
   reducer: (oldState: P) => P,
 }
 
-type Action = Array<StateReducer<any>>;
+export type Action = StateReducer<any>[];
 
-export interface ActionHistoryItem<P> {
+interface ActionHistoryItem<P> {
   state$: BehaviorSubject<P>,
   oldState: P,
 };
@@ -39,7 +38,7 @@ export default class ActionQueue {
     return this.actions.length;
   }
 
-  next() {
+  goNext() {
     const action = this.actions[this.actionIndex];
 
     if (!action) {
@@ -55,7 +54,7 @@ export default class ActionQueue {
     this.actionIndex += 1;
   }
 
-  previous() {
+  goPrevious() {
     const actionHistory = this.actionHistory.pop();
 
     if (!actionHistory) {
@@ -63,6 +62,24 @@ export default class ActionQueue {
     }
 
     actionHistory.forEach(({ state$, oldState }) => state$.next(oldState));
+
+    this.actionIndex -= 1;
+  }
+
+  goNextSafe() {
+    if (this.actionIndex >= this.actions.length) {
+      return;
+    }
+
+    this.goNext();
+  }
+
+  goPreviousSafe() {
+    if (this.actionIndex <= 0) {
+      return;
+    }
+
+    this.goPrevious();
   }
 }
 

@@ -17,16 +17,16 @@
         children: [ ],
       });
 
-      ReactDOM.render(React.createElement(debut.ViewComponent, component), document.getElementById('root'));
-
       const actions = [
         [ { state$: component.state$, reducer: () => ({ text: 'Goodbye' }) } ]
       ]
 
       const actionQueue = new debut.ActionQueue(actions);
 
-      setTimeout(() => { actionQueue.next() }, 500);
-      setTimeout(() => { actionQueue.previous() }, 1000);
+      ReactDOM.render(React.createElement(debut.Presentation, {
+        actionQueue,
+        root: component,
+      }), document.getElementById('root'));
     </script>
   </body>
 </html>

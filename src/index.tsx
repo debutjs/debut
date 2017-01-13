@@ -7,9 +7,4 @@ export const component = componentImport;
 
 export { default as ActionQueue } from './state/ActionQueue';
 export { default as ViewComponent } from './view/ViewComponent';
-
-createComponent({ 
-  component: ({  }) => <div>Hi {}</div>, 
-  initialState: { },
-  children: [ ],
-});
+export { default as Presentation } from './presentation/Presentation';

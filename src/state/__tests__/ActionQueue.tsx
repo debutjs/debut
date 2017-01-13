@@ -19,11 +19,11 @@ describe('ActionQueue', () => {
   it('proceeds correctly', () => {
     const { component, actionQueue } = createActionQueueAndComponent();
 
-    actionQueue.next();
+    actionQueue.goNext();
 
     expect(component.state$.getValue()).toEqual({ x: 6, y: 5 });
 
-    actionQueue.next();
+    actionQueue.goNext();
 
     expect(component.state$.getValue()).toEqual({ x: 6, y: 4 });
   });
@@ -31,13 +31,13 @@ describe('ActionQueue', () => {
   it('reverses correctly', () => {
     const { component, actionQueue } = createActionQueueAndComponent();
 
-    actionQueue.next();
-    actionQueue.next();
-    actionQueue.previous();
+    actionQueue.goNext();
+    actionQueue.goNext();
+    actionQueue.goPrevious();
 
     expect(component.state$.getValue()).toEqual({ x: 6, y: 5 });
 
-    actionQueue.previous();
+    actionQueue.goPrevious();
 
     expect(component.state$.getValue()).toEqual({ x: 5, y: 5 });
   });
@@ -45,11 +45,11 @@ describe('ActionQueue', () => {
   it('throws exceptions when it proceeds too far', () => {
     const { actionQueue } = createActionQueueAndComponent();
 
-    actionQueue.next();
-    actionQueue.next();
+    actionQueue.goNext();
+    actionQueue.goNext();
 
     expect(() => {  
-      actionQueue.next();
+      actionQueue.goNext();
     }).toThrowError(ActionQueueOutOfBoundsError);
   });
 
@@ -57,7 +57,7 @@ describe('ActionQueue', () => {
     const { actionQueue } = createActionQueueAndComponent();
 
     expect(() => {
-      actionQueue.previous();
+      actionQueue.goPrevious();
     }).toThrowError(ActionQueueOutOfBoundsError);
   });
 });
