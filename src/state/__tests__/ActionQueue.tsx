@@ -3,7 +3,7 @@ import { createComponent } from 'src/view/component';
 
 function createActionQueueAndComponent() {
   const component = createComponent({
-    component: () => (<div>Hello</div>),
+    viewComponent: () => (<div>Hello</div>),
     initialState: { x: 5, y: 5 }
   });
 

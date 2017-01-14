@@ -2,18 +2,22 @@ import React from 'react';
 import { Subscription } from 'rxjs/Subscription';
 import { Component } from './component';
 
-export default class ViewComponent<P> extends React.Component<Component<P>, { componentState: P }> {
+type Props<P> = {
+  component: Component<P>,
+};
+
+export default class ViewComponent<P> extends React.Component<Props<P>, { componentState: P }> {
   private subscription: Subscription | null = null;
 
-  constructor(props: Component<P>) {
+  constructor(props: Props<P>) {
     super(props);
     this.state = {
-      componentState: props.state$.getValue(),
+      componentState: props.component.state$.getValue(),
     };
   }
 
   componentWillMount() {
-    this.subscription = this.props.state$.subscribe((componentState) => this.setState({ componentState }));
+    this.subscription = this.props.component.state$.subscribe((componentState) => this.setState({ componentState }));
   }
 
   componentWillUnmount() {
@@ -23,8 +27,10 @@ export default class ViewComponent<P> extends React.Component<Component<P>, { co
   }
 
   render() {
-    const Component = this.props.component;
+    const Component = this.props.component.viewComponent;
 
-    return <Component {...this.state.componentState}>{this.props.children}</Component>
+    const renderedChildren = this.props.component.children.map(component => <ViewComponent component={component} />);
+
+    return <Component {...this.state.componentState}>{renderedChildren}</Component>
   }
 }

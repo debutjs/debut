@@ -24,7 +24,7 @@ function handleKeyPress(actionQueue: ActionQueue) {
 export default function Presentation({ actionQueue, root }: Props) {
   return (
     <div tabIndex={0} onKeyDown={handleKeyPress(actionQueue)}>
-      <ViewComponent {...root} />
+      <ViewComponent component={root} />
     </div>
   );
 }
