@@ -9,9 +9,10 @@ type Dimensions = {
 
 type Props = {
   innerDimensions: Dimensions,
+  children?: JSX.Element[];
 }
 
-function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight } : Dimensions, { width: outerWidth, height: outerHeight } : Dimensions) {
+function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight }: Dimensions, { width: outerWidth, height: outerHeight }: Dimensions) {
   const innerAspect = innerWidth / innerHeight;
   const outerAspect = outerWidth / outerHeight;
 
@@ -24,14 +25,14 @@ function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight } : Di
   return outerWidth / innerWidth;
 }
 
-export default function ZoomToFit({ innerDimensions } : Props) {
+export default function ZoomToFit({ innerDimensions, children }: Props) {
   return (
     <Measure>
       {outerDimensions => (
         <div className="debut-ZoomToFit">
           <Measure>
-            <div style={{transform: `scale(${dimensionsToScaleFactor(this.props.innerDimensions, outerDimensions)})`}} className="debut-ZoomToFit__toFit">
-              {this.props.children}
+            <div style={{transform: `scale(${dimensionsToScaleFactor(innerDimensions, outerDimensions)})`}} className="debut-ZoomToFit__toFit">
+              {children}
             </div>
           </Measure>
         </div>

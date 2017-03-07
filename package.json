@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "webpack",
+    "watch": "webpack -w",
     "test": "jest"
   },
   "peerDependencies": {
