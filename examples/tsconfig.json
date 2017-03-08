@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "files": [
+    "./example1.tsx"
+  ],
+  "compilerOptions": {
+    "jsx": "react",
+    "sourceMap": false
+  }
+}

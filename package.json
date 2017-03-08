@@ -11,6 +11,7 @@
   "devDependencies": {
     "@types/jest": "^16.0.3",
     "@types/react": "^0.14.55",
+    "@types/react-dom": "^0.14.23",
     "autoprefixer": "^6.6.1",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
@@ -44,5 +45,8 @@
     "modulePaths": [
       "."
     ]
+  },
+  "dependencies": {
+    "typescript": "^2.1.4"
   }
 }

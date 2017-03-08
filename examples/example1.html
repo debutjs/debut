@@ -8,38 +8,6 @@
     <script src="../node_modules/react/dist/react.js"></script>
     <script src="../node_modules/react-dom/dist/react-dom.js"></script>
     <script src="../dist/debut.js"></script>
-    <script>
-      function MyComponent({ text }) {
-        return React.createElement('span', null, text);
-      }
-
-      const component1 = debut.component.createComponent({
-        viewComponent: MyComponent,
-        initialState: { text: 'Hello, ' },
-        children: [ ],
-      });
-
-      const component2 = debut.component.createComponent({
-        viewComponent: MyComponent,
-        initialState: { text: 'World.' },
-        children: [ ],
-      });
-
-      const actions = [
-        [ { state$: component1.state$, reducer: () => ({ text: 'Goodbye, ' }) } ],
-        [ { state$: component2.state$, reducer: () => ({ text: 'Potatoes.' }) } ],
-      ]
-
-      const actionQueue = new debut.ActionQueue(actions);
-
-      ReactDOM.render(React.createElement(debut.Presentation, {
-        actionQueue,
-        root: debut.component.createComponent({
-          viewComponent: ({ children }) => React.createElement('div', null, children),
-          initialState: { },
-          children: [component1, component2],
-        })
-      }), document.getElementById('root'));
-    </script>
+    <script src="./example1.js"></script>
   </body>
 </html>

@@ -29,7 +29,13 @@ export default class ViewComponent<P> extends React.Component<Props<P>, { compon
   render() {
     const Component = this.props.component.viewComponent;
 
-    const renderedChildren = this.props.component.children.map(component => <ViewComponent component={component} />);
+    const renderedChildren = this.props.component.children.map((component, index) => {
+      if (typeof component === 'string') {
+        return component;
+      }
+
+      return <ViewComponent component={component} key={index} />
+    });
 
     return <Component {...this.state.componentState}>{renderedChildren}</Component>
   }
