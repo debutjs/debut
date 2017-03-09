@@ -80,6 +80,8 @@ export default class ActionQueue {
     actionHistory.forEach(({ state$, oldState }) => state$.next(oldState));
 
     this.actionIndex -= 1;
+
+    this.sendChanges();
   }
 
   goNextSafe() {
