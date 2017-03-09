@@ -20,9 +20,6 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-          },
-          {
             loader: 'ts-loader',
           },
         ],
@@ -51,6 +48,12 @@ module.exports = {
       commonjs: 'react',
       amd: 'react',
     },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+    },
   },
-  devtool: 'eval',
+  devtool: '#source-map',
 };
