@@ -1,15 +1,30 @@
-/// <reference path="types/index.d.ts" />
-function MyComponent({ text }) {
-    return React.createElement("span", null, text);
+function MyComponent(_ref) {
+  var text = _ref.text;
+
+  return React.createElement(
+    "span",
+    null,
+    text
+  );
 }
-const component = debut.createComponentFromReact(React.createElement("div", null,
-    React.createElement(MyComponent, { text: "Hello", name: "one" }),
-    ", ",
-    React.createElement(MyComponent, { text: "world" })));
-const actionQueue = new debut.ActionQueue([
-    [{ state$: debut.findComponent(component, 'one')[0].state$, reducer: () => ({ text: 'Goodbye' }) }],
-]);
-ReactDOM.render(React.createElement(debut.Presentation, {
-    actionQueue,
-    root: component,
-}), document.getElementById('root'));
+
+var component = debut.createComponentFromReact(React.createElement(
+  "div",
+  null,
+  React.createElement(MyComponent, { text: "Hello", name: "one" }),
+  ", ",
+  React.createElement(MyComponent, { text: "world", name: "two" })
+));
+
+var actions = debut.createActions(debut.action(debut.findComponents(component, 'one'), function () {
+  return { text: 'Goodbye' };
+}), debut.action(debut.findComponents(component, 'two'), function () {
+  return { text: 'Monkey' };
+}), [debut.action(debut.findComponents(component, 'one'), function () {
+  return { text: 'Change' };
+}), debut.action(debut.findComponents(component, 'two'), function () {
+  return { text: 'Together' };
+})]);
+
+ReactDOM.render(React.createElement(debut.Presentation, { actions: actions, root: component }), document.getElementById('root'));
+

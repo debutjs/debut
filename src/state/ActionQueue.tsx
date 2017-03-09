@@ -1,7 +1,7 @@
 import { Component, pushStateToComponent } from 'src/view/component';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-interface StateReducer<P> {
+export interface StateReducer<P> {
   state$: BehaviorSubject<P>,
   reducer: (oldState: P) => P,
 }

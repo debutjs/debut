@@ -2,7 +2,7 @@ import React from 'react';
 import { Subscription } from 'rxjs/Subscription';
 import { Component } from './component';
 
-type Props<P> = {
+export type Props<P> = {
   component: Component<P>,
 };
 

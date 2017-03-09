@@ -15,6 +15,7 @@ function isReactElement(test: any): test is React.ReactElement<any> {
 
 export default function createComponentFromReact(component: React.ReactElement<{ children?: (JSX.Element | string | number)[] } & DebutComponentProps>): Component<any> {
   const { name, ...props } = component.props;
+
   return createComponent({
     viewComponent: getDebutComponentTypeFromReactElement(component),
     initialState: props,

@@ -1,9 +1,8 @@
-import { htmlComponentForType } from './components/HTMLComponent';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReactComponent } from './react-types';
 import React from 'react';
 
-interface ComponentDefinition<P> {
+export interface ComponentDefinition<P> {
   viewComponent: ReactComponent<P & { children: ReactComponent<any>[] }>;
   initialState: P;
   children?: AllComponents[];

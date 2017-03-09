@@ -1,5 +1,14 @@
 {
   "compileOnSave": false,
+  "exclude": [
+    "examples",
+    "node_modules",
+    "src/view",
+    "src/state",
+    "src/presentation",
+    "src/helper",
+    "src/components"
+  ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "lib": [
