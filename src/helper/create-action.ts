@@ -1,6 +1,7 @@
 import ActionQueue, { StateReducer, Action } from 'src/state/ActionQueue';
 import { Component } from 'src/view/component';
 import { findComponents } from './find-component';
+import { createActionQueueWithMemory } from './action-queue-memory';
 
 type NestedAction = StateReducer<any> | StateReducer<any>[];
 type NestedReducer = NestedAction[] | NestedAction;
@@ -43,7 +44,7 @@ function normalizeActions(actions: NestedReducer[]) {
 }
 
 function createActions(...actions: NestedReducer[]) {
-  return new ActionQueue(normalizeActions(actions));
+  return createActionQueueWithMemory(normalizeActions(actions));
 }
 
 function action<P extends object>(components: Component<P>[], reducer: (old: P) => P): Action {

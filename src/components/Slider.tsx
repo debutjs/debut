@@ -26,7 +26,6 @@ function slideTransformForDirection(direction: Direction, slideIndex: number) {
 }
 
 function slideChild(child: JSX.Element, index: number, direction: Direction) {
-  console.log(index);
   return (
     <Transform
       {...slideTransformForDirection(direction, -index)}

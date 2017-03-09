@@ -26,9 +26,10 @@ export function createActionHistoryItem<P>(actionHistoryItem: ActionHistoryItem<
 }
 
 export default class ActionQueue {
-  private actions: Action[] = [];
-  private actionHistory: ActionHistory[] = [];
-  private actionIndex = 0;
+  actions: Action[] = [];
+  actionHistory: ActionHistory[] = [];
+  actionIndex = 0;
+  changes: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(actions: Action[]) {
     this.actions = actions;
@@ -36,6 +37,19 @@ export default class ActionQueue {
 
   get length() {
     return this.actions.length;
+  }
+
+  /**
+   * Go to a particular action index
+   */
+  goTo(actionIndex: number) {
+    while ((this.actionIndex < actionIndex) && (this.actionIndex < this.actions.length)) {
+      this.goNext();
+    }
+
+    while ((this.actionIndex > actionIndex) && (this.actionIndex > 0)) {
+      this.goPrevious();
+    }
   }
 
   goNext() {
@@ -52,6 +66,8 @@ export default class ActionQueue {
     action.forEach(({ state$, reducer }) => state$.next(reducer(state$.getValue())));
 
     this.actionIndex += 1;
+
+    this.sendChanges();
   }
 
   goPrevious() {
@@ -80,6 +96,14 @@ export default class ActionQueue {
     }
 
     this.goPrevious();
+  }
+
+  observe() {
+    return this.changes.asObservable();
+  }
+
+  sendChanges() {
+    this.changes.next(this.actionIndex);
   }
 }
 
