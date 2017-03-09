@@ -12,3 +12,5 @@ export * from './helper/create-action';
 export { default as ActionQueue } from './state/ActionQueue';
 export { default as ViewComponent } from './view/ViewComponent';
 export { default as Presentation } from './presentation/Presentation';
+
+export * from './components';

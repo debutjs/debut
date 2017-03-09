@@ -14,12 +14,17 @@ function isReactElement(test: any): test is React.ReactElement<any> {
 }
 
 export default function createComponentFromReact(component: React.ReactElement<{ children?: (JSX.Element | string | number)[] } & DebutComponentProps>): Component<any> {
-  const { name, ...props } = component.props;
+  const { name, children, ...props } = component.props;
+  console.log(children);
+
+  const normalizedChildren = children ?
+    (Array.isArray(children) ? children : [children]) :
+    [];
 
   return createComponent({
     viewComponent: getDebutComponentTypeFromReactElement(component),
     initialState: props,
-    children: (component.props.children || []).map(child => {
+    children: normalizedChildren.map(child => {
       if ((typeof child === 'number') || (typeof child === 'string')) {
         return `${child}`;
       }
