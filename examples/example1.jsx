@@ -3,7 +3,7 @@ function MyComponent({ text }) {
 }
 
 const component = debut.createComponentFromReact(
-  <debut.Slider name="slide">
+  <debut.Slider name="slide" direction="down">
     <div><MyComponent text="Hello" name="one yes" />, <MyComponent text="world" name="two yes" /></div>
     <div>
       <debut.Transform x={30} style={{ transition: '1s' }} name="mover">Hello!</debut.Transform>

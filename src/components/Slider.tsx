@@ -4,17 +4,44 @@ import classnames from 'classnames';
 import './Slider.css';
 import Transform from './Transform';
 
+type Direction = 'up' | 'down' | 'left' | 'right';
+
 export interface Props extends React.HTMLProps<any> {
   slideIndex?: number;
   children?: JSX.Element[];
   className?: string;
+  direction?: Direction;
 }
 
-function Slider({ slideIndex = 0, className = '', children = [], ...passThrough}: Props) {
+function slideTransformForDirection(direction: Direction, slideIndex: number) {
+  const percentage = `${((direction === 'up' || direction === 'left') ? -1 : 1) * slideIndex * 100}%`;
+  switch (direction) {
+  case 'up':
+  case 'down':
+    return { y: percentage };
+  case 'left':
+  case 'right':
+    return { x: percentage };
+  }
+}
+
+function slideChild(child: JSX.Element, index: number, direction: Direction) {
+  console.log(index);
+  return (
+    <Transform
+      {...slideTransformForDirection(direction, -index)}
+      className="debut-Slider__slide"
+      key={index}>
+        {child}
+    </Transform>
+  );
+}
+
+function Slider({ slideIndex = 0, direction = 'left', className = '', children = [], ...passThrough}: Props) {
   return (
     <div className={classnames('debut-Slider', className)} {...passThrough}>
-      <Transform x={`${-slideIndex * 100}%`} style={{ transition: 'transform 0.5s' }} className="debut-Slider__inner">
-        {children.map((child, index) => <Transform x={`${index * 100}%`} className="debut-Slider__slide" key={index}>{child}</Transform>)}
+      <Transform {...slideTransformForDirection(direction, slideIndex)} style={{ transition: 'transform 0.5s' }} className="debut-Slider__inner">
+        {children.map((child, index) => slideChild(child, index, direction))}
       </Transform>
     </div>
   );

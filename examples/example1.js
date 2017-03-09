@@ -10,7 +10,7 @@ function MyComponent(_ref) {
 
 var component = debut.createComponentFromReact(React.createElement(
   debut.Slider,
-  { name: "slide" },
+  { name: "slide", direction: "down" },
   React.createElement(
     "div",
     null,
