@@ -29,15 +29,9 @@ var component = debut.createComponentFromReact(React.createElement(
   )
 ));
 
-var actions = debut.createActions(debut.action(debut.findComponents(component, 'one'), function () {
-  return { text: 'Goodbye' };
-}), debut.action(debut.findComponents(component, 'two'), function () {
-  return { text: 'Monkey' };
-}), [debut.action(debut.findComponents(component, 'one'), function () {
-  return { text: 'Change' };
-}), debut.action(debut.findComponents(component, 'two'), function () {
-  return { text: 'Together' };
-})], debut.action(debut.findComponents(component, 'slide'), debut.Slider.advance()), debut.action(debut.findComponents(component, 'mover'), debut.Transform.move({ x: 50, y: 20 })));
+var actions = debut.actionsForComponent(component, function (action) {
+  return [action('one', debut.mergeState({ text: 'Goodbye' })), action('two', debut.mergeState({ text: 'Monkey' })), [action('one', debut.mergeState({ text: 'Change' })), action('two', debut.mergeState({ text: 'Together' }))], action('slide', debut.Slider.advance()), action('mover', debut.Transform.move({ x: 50, y: 20 }))];
+});
 
 ReactDOM.render(React.createElement(debut.Presentation, { actions: actions, root: component }), document.getElementById('root'));
 

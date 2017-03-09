@@ -11,15 +11,15 @@ const component = debut.createComponentFromReact(
   </debut.Slider>
 );
 
-const actions = debut.createActions(
-  debut.action(debut.findComponents(component, 'one'), () => ({ text: 'Goodbye' })),
-  debut.action(debut.findComponents(component, 'two'), () => ({ text: 'Monkey' })),
+const actions = debut.actionsForComponent(component, action => [
+  action('one', debut.mergeState({ text: 'Goodbye' })),
+  action('two', debut.mergeState({ text: 'Monkey' })),
   [
-    debut.action(debut.findComponents(component, 'one'), () => ({ text: 'Change' })),
-    debut.action(debut.findComponents(component, 'two'), () => ({ text: 'Together' })),
+    action('one', debut.mergeState({ text: 'Change' })),
+    action('two', debut.mergeState({ text: 'Together' })),
   ],
-  debut.action(debut.findComponents(component, 'slide'), debut.Slider.advance()),
-  debut.action(debut.findComponents(component, 'mover'), debut.Transform.move({ x: 50, y: 20 })),
-);
+  action('slide', debut.Slider.advance()),
+  action('mover', debut.Transform.move({ x: 50, y: 20 })),
+]);
 
 ReactDOM.render(<debut.Presentation actions={actions} root={component} />, document.getElementById('root'));
