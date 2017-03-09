@@ -1,14 +1,18 @@
 {
+  "name": "debut",
+  "version": "0.0.11",
   "scripts": {
     "build": "webpack",
     "watch": "webpack -w",
     "test": "jest"
   },
+  "main": "dist/debut.js",
   "peerDependencies": {
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },
   "devDependencies": {
+    "@types/classnames": "^0.0.32",
     "@types/jest": "^16.0.3",
     "@types/react": "^0.14.55",
     "@types/react-dom": "^0.14.23",
@@ -17,6 +21,7 @@
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
     "jest": "^18.1.0",
@@ -27,6 +32,7 @@
     "rxjs": "^5.0.2",
     "style-loader": "^0.13.1",
     "ts-loader": "^1.3.3",
+    "typescript": "2.2.1",
     "webpack": "2.2.0-rc.2"
   },
   "jest": {
@@ -44,11 +50,5 @@
     "modulePaths": [
       "."
     ]
-  },
-  "dependencies": {
-    "@types/classnames": "^0.0.32",
-    "classnames": "^2.2.5",
-    "ts-loader": "^1.3.3",
-    "typescript": "2.2.1"
   }
 }
