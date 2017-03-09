@@ -16,8 +16,6 @@ function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight }: Dim
   const innerAspect = innerWidth / innerHeight;
   const outerAspect = outerWidth / outerHeight;
 
-  console.log(innerWidth, outerWidth);
-
   if (innerAspect < outerAspect) {
     return outerHeight / innerHeight;
   }

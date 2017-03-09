@@ -5,7 +5,7 @@ export function findComponents(component: AllComponents, name: string): Componen
     return [];
   }
 
-  let components = component.name === name ? [component] : [];
+  let components = component.name.includes(name) ? [component] : [];
   
   return components.concat(...(component.children.map(component => findComponents(component, name))));
 }

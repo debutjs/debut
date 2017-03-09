@@ -6,14 +6,14 @@ export interface ComponentDefinition<P> {
   viewComponent: ReactComponent<P & { children: ReactComponent<any>[] }>;
   initialState: P;
   children?: AllComponents[];
-  name?: string;
+  name?: string[];
 };
 
 export interface Component<P> {
   state$: BehaviorSubject<P>;
   viewComponent: ReactComponent<P>;
   children: AllComponents[];
-  name?: string;
+  name: string[];
 }
 
 export interface DebutComponentProps {
@@ -27,7 +27,7 @@ export function createComponent<P>(definition: ComponentDefinition<P>): Componen
     state$: new BehaviorSubject(definition.initialState),
     viewComponent: definition.viewComponent,
     children: definition.children || [],
-    name: definition.name,
+    name: definition.name || [],
   };
 }
 

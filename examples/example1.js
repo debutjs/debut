@@ -14,9 +14,9 @@ var component = debut.createComponentFromReact(React.createElement(
   React.createElement(
     "div",
     null,
-    React.createElement(MyComponent, { text: "Hello", name: "one" }),
+    React.createElement(MyComponent, { text: "Hello", name: "one yes" }),
     ", ",
-    React.createElement(MyComponent, { text: "world", name: "two" })
+    React.createElement(MyComponent, { text: "world", name: "two yes" })
   ),
   React.createElement(
     "div",
@@ -30,7 +30,7 @@ var component = debut.createComponentFromReact(React.createElement(
 ));
 
 var actions = debut.actionsForComponent(component, function (action) {
-  return [action('one', debut.mergeState({ text: 'Goodbye' })), action('two', debut.mergeState({ text: 'Monkey' })), [action('one', debut.mergeState({ text: 'Change' })), action('two', debut.mergeState({ text: 'Together' }))], action('slide', debut.Slider.advance()), action('mover', debut.Transform.move({ x: 50, y: 20 }))];
+  return [action('one', debut.mergeState({ text: 'Goodbye' })), action('two', debut.mergeState({ text: 'Monkey' })), [action('one', debut.mergeState({ text: 'Change' })), action('two', debut.mergeState({ text: 'Together' }))], action('yes', debut.mergeState({ text: 'Yes' })), action('slide', debut.Slider.advance()), action('mover', debut.Transform.move({ x: 50, y: 20 }))];
 });
 
 ReactDOM.render(React.createElement(debut.Presentation, { actions: actions, root: component }), document.getElementById('root'));

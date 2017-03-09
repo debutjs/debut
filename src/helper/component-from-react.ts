@@ -15,7 +15,6 @@ function isReactElement(test: any): test is React.ReactElement<any> {
 
 export default function createComponentFromReact(component: React.ReactElement<{ children?: (JSX.Element | string | number)[] } & DebutComponentProps>): Component<any> {
   const { name, children, ...props } = component.props;
-  console.log(children);
 
   const normalizedChildren = children ?
     (Array.isArray(children) ? children : [children]) :
@@ -31,6 +30,6 @@ export default function createComponentFromReact(component: React.ReactElement<{
 
       return createComponentFromReact(child);
     }),
-    name: name,
+    name: name ? name.split(' ') : [],
   });
 }

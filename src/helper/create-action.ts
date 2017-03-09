@@ -1,8 +1,9 @@
 import ActionQueue, { StateReducer, Action } from 'src/state/ActionQueue';
 import { Component } from 'src/view/component';
+import { findComponents } from './find-component';
 
 type NestedAction = StateReducer<any> | StateReducer<any>[];
-type NestedReducer = (StateReducer<any> | StateReducer<any>[])[] | NestedAction;
+type NestedReducer = NestedAction[] | NestedAction;
 
 function flattenAction(action: NestedAction[]) {
   return action.map(action => {
@@ -41,10 +42,24 @@ function normalizeActions(actions: NestedReducer[]) {
   })
 }
 
-export function createActions(...actions: NestedReducer[]) {
+function createActions(...actions: NestedReducer[]) {
   return new ActionQueue(normalizeActions(actions));
 }
 
-export function action<P extends object>(components: Component<P>[], reducer: (old: P) => P): Action {
+function action<P extends object>(components: Component<P>[], reducer: (old: P) => P): Action {
   return components.map(component => ({ state$: component.state$, reducer }));
+}
+
+type CreateActionHelper = (component: (string | Component<any>[]), reducer: (old: object) => object) => Action;
+
+export function actionsForComponent<P>(component: Component<P>, actionCreator: (action: CreateActionHelper) => Action[]) {
+  const createActionHelper: CreateActionHelper = (componentsOrName, reducer) => {
+    const components = (typeof componentsOrName === 'string') ?
+      findComponents(component, componentsOrName) :
+      componentsOrName;
+    
+    return action(components, reducer);
+  };
+
+  return createActions(...actionCreator(createActionHelper))
 }

@@ -4,7 +4,7 @@ function MyComponent({ text }) {
 
 const component = debut.createComponentFromReact(
   <debut.Slider name="slide">
-    <div><MyComponent text="Hello" name="one" />, <MyComponent text="world" name="two" /></div>
+    <div><MyComponent text="Hello" name="one yes" />, <MyComponent text="world" name="two yes" /></div>
     <div>
       <debut.Transform x={30} style={{ transition: '1s' }} name="mover">Hello!</debut.Transform>
     </div>
@@ -18,6 +18,7 @@ const actions = debut.actionsForComponent(component, action => [
     action('one', debut.mergeState({ text: 'Change' })),
     action('two', debut.mergeState({ text: 'Together' })),
   ],
+  action('yes', debut.mergeState({ text: 'Yes' })),
   action('slide', debut.Slider.advance()),
   action('mover', debut.Transform.move({ x: 50, y: 20 })),
 ]);
