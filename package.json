@@ -5,7 +5,8 @@
     "build": "webpack",
     "build:prod": "webpack -p",
     "watch": "webpack -w",
-    "test": "jest"
+    "test": "jest",
+    "publish-please": "publish-please"
   },
   "main": "dist/debut.js",
   "peerDependencies": {

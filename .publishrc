@@ -9,5 +9,5 @@
   },
   "confirm": true,
   "publishTag": "latest",
-  "prePublishScript": "yarn build"
+  "prePublishScript": "yarn build:prod"
 }
