@@ -13,7 +13,9 @@ export interface Props extends React.HTMLProps<any> {
 function Slider({ slideIndex = 0, className = '', children = [], ...passThrough}: Props) {
   return (
     <div className={classnames('debut-Slider', className)} {...passThrough}>
-        {children.map((child, index) => <Transform x={`${-(slideIndex - index) * 100}%`} style={{ transition: 'transform 0.5s' }} key={index}>{child}</Transform>)}
+      <Transform x={`${-slideIndex * 100}%`} style={{ transition: 'transform 0.5s' }} className="debut-Slider__inner">
+        {children.map((child, index) => <Transform x={`${index * 100}%`} className="debut-Slider__slide" key={index}>{child}</Transform>)}
+      </Transform>
     </div>
   );
 };
