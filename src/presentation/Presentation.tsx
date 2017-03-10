@@ -9,6 +9,10 @@ import ZoomToFit from './ZoomToFit';
 interface Props {
   actions: ActionQueue,
   root: Component<any>,
+  size?: {
+    width: number,
+    height: number,
+  };
 }
 
 function handleKeyPress(actionQueue: ActionQueue) {
@@ -24,11 +28,11 @@ function handleKeyPress(actionQueue: ActionQueue) {
   }
 }
 
-export default function Presentation({ actions, root }: Props) {
+export default function Presentation({ actions, root, size = { width: 1600, height: 900 } }: Props) {
   return (
     <div tabIndex={0} className="debut-Presentation" onKeyDown={handleKeyPress(actions)}>
-      <ZoomToFit innerDimensions={{ width: 1600, height: 900 }}>
-        <div className="debut-Presentation__inner" style={{ width: 1600, height: 900 }}>
+      <ZoomToFit innerDimensions={size}>
+        <div className="debut-Presentation__inner" style={size}>
           <ViewComponent component={root} />
         </div>
       </ZoomToFit>

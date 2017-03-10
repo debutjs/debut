@@ -24,4 +24,4 @@ const actions = debut.actionsForComponent(component, action => [
   action('mover', debut.Transform.move({ x: 50, y: 20 })),
 ]);
 
-ReactDOM.render(<debut.Presentation actions={actions} root={component} />, document.getElementById('root'));
+ReactDOM.render(<debut.Presentation actions={actions} root={component}/>, document.getElementById('root'));
