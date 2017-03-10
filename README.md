@@ -31,4 +31,7 @@ To rebuild an example, simply use:
 
 ```bash
 babel example<x>.jsx > example<x>.js
-``` 
+```
+
+If you wish to commit an example, make sure to commit it's transpiled form as
+well!
