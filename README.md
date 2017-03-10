@@ -10,9 +10,9 @@
  - [Yarn](https://yarnpkg.com/en/)
  - (Optional: for rebuilding examples) [Babel](https://babeljs.io/)
 
- ## Building
+## Building
 
- ```bash
+```bash
 git clone https://github.com/debutjs/debut.git
 cd debut
 yarn
