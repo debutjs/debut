@@ -7,6 +7,7 @@ const component = debut.createComponentFromReact(
     <div><MyComponent text="Hello" name="one yes" />, <MyComponent text="world" name="two yes" /></div>
     <div>
       <debut.Transform x={30} style={{ transition: '1s' }} name="mover">Hello!</debut.Transform>
+      <img />
     </div>
   </debut.Slider>
 );

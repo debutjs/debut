@@ -25,7 +25,8 @@ var component = debut.createComponentFromReact(React.createElement(
       debut.Transform,
       { x: 30, style: { transition: '1s' }, name: "mover" },
       "Hello!"
-    )
+    ),
+    React.createElement("img", null)
   )
 ));
 
