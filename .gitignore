@@ -6,9 +6,13 @@ npm-debug.log
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
 !.vscode/extensions.json
+
+# Descision on whether these should be ignored or not to be deferred to when
+# they may be needed.
+# See: https://github.com/debutjs/debut/pull/5 
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
 
 # End of https://www.gitignore.io/api/visualstudiocode
