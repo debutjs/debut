@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import ActionQueue, { ActionQueueOutOfBoundsError, createActionHistoryItem } from '../ActionQueue';
 import { createComponent } from 'src/view/component';
 

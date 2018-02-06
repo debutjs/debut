@@ -1,9 +1,8 @@
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ReactComponent } from './react-types';
-import React from 'react';
+import * as React from 'react';
 
 export interface ComponentDefinition<P> {
-  viewComponent: ReactComponent<P & { children: ReactComponent<any>[] }>;
+  viewComponent: React.ComponentType<P>;
   initialState: P;
   children?: AllComponents[];
   name?: string[];
@@ -11,7 +10,7 @@ export interface ComponentDefinition<P> {
 
 export interface Component<P> {
   state$: BehaviorSubject<P>;
-  viewComponent: ReactComponent<P>;
+  viewComponent: React.ComponentType<P>;
   children: AllComponents[];
   name: string[];
 }

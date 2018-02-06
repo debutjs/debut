@@ -1,15 +1,9 @@
 import './ZoomToFit.css';
 import * as React from 'react';
-import Measure from 'react-measure';
-
-type Dimensions = {
-  width: number,
-  height: number,
-};
+import ContainerDimensions, { Dimensions } from 'react-container-dimensions';
 
 type Props = {
   innerDimensions: Dimensions,
-  children?: JSX.Element[];
 }
 
 function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight }: Dimensions, { width: outerWidth, height: outerHeight }: Dimensions) {
@@ -23,18 +17,20 @@ function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight }: Dim
   return outerWidth / innerWidth;
 }
 
-export default function ZoomToFit({ innerDimensions, children }: Props) {
-  return (
-    <Measure>
-      {outerDimensions => (
-        <div className="debut-ZoomToFit">
-          <Measure>
-            <div style={{transform: `scale(${dimensionsToScaleFactor(innerDimensions, outerDimensions)})`}} className="debut-ZoomToFit__toFit">
-              {children}
-            </div>
-          </Measure>
-        </div>
-      )}
-    </Measure>
-  );
+export default class ZoomToFit extends React.PureComponent<Props> {
+  renderInside = (outerDimensions: Dimensions) => {
+    return (
+      <div style={{transform: `scale(${dimensionsToScaleFactor(this.props.innerDimensions, outerDimensions)})`}} className="debut-ZoomToFit__toFit">
+        {this.props.children}
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div className="debut-ZoomToFit">
+        <ContainerDimensions>{this.renderInside}</ContainerDimensions>
+      </div>
+    );
+  }
 }

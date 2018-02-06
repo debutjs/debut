@@ -29,7 +29,7 @@ export default class ViewComponent<P> extends React.Component<Props<P>, { compon
   render() {
     const Component = this.props.component.viewComponent;
 
-    const renderedChildren = this.props.component.children.map((component, index) => {
+    const renderedChildren: React.ReactNode[] = this.props.component.children.map((component, index) => {
       if (typeof component === 'string') {
         return component;
       }
@@ -37,6 +37,6 @@ export default class ViewComponent<P> extends React.Component<Props<P>, { compon
       return <ViewComponent component={component} key={index} />
     });
 
-    return <Component {...this.state.componentState}>{renderedChildren}</Component>
+    return React.createElement(Component, this.state.componentState, ...renderedChildren);
   }
 }
