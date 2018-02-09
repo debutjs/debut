@@ -15,15 +15,20 @@ interface NecessaryReactComponent {
 }
 
 type AcceptedChild = NecessaryReactComponent | string;
-export type AcceptedChildren = AcceptedChild | AcceptedChild[] | null | undefined;
+export type AcceptedChildren =
+  | AcceptedChild
+  | AcceptedChild[]
+  | null
+  | undefined;
 
 function normalizeArray<T>(array: T | T[] | null | undefined) {
-  return array ?
-    (Array.isArray(array) ? array : [array]) :
-    [];
+  return array ? (Array.isArray(array) ? array : [array]) : [];
 }
 
-export function extractRangesAndTextFromReactComponents(components: AcceptedChildren, startOfRange = 0): ExtractedRanges {
+export function extractRangesAndTextFromReactComponents(
+  components: AcceptedChildren,
+  startOfRange = 0,
+): ExtractedRanges {
   let rangeAt = startOfRange;
   let text = '';
   let ranges: (ComponentWithRange | number)[] = [];
@@ -36,7 +41,13 @@ export function extractRangesAndTextFromReactComponents(components: AcceptedChil
       rangeAt = rangeAt + component.length;
       ranges.push(component.length);
     } else {
-      const { ranges: innerRanges, text: innerText } = extractRangesAndTextFromReactComponents(component.props.children, rangeAt);
+      const {
+        ranges: innerRanges,
+        text: innerText,
+      } = extractRangesAndTextFromReactComponents(
+        component.props.children,
+        rangeAt,
+      );
       text = text + innerText;
       rangeAt = rangeAt + innerText.length;
       ranges.push({
@@ -58,5 +69,7 @@ export function stringifyReactComponents(components: AcceptedChildren): string {
     return components;
   }
 
-  return normalizeArray(components).map(stringifyReactComponents).join('');
+  return normalizeArray(components)
+    .map(stringifyReactComponents)
+    .join('');
 }

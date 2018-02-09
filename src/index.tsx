@@ -5,7 +5,9 @@ import { createComponent } from './view/component';
 import * as component from './view/component';
 export { component };
 
-export { default as createComponentFromReact } from './helper/component-from-react';
+export {
+  default as createComponentFromReact,
+} from './helper/component-from-react';
 export { default as mergeState } from './helper/merge-state';
 export * from './helper/find-component';
 export * from './helper/create-action';

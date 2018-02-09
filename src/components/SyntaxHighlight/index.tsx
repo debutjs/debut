@@ -13,7 +13,12 @@ export default class SyntaxHighlight extends React.Component<Props> {
   render() {
     return (
       <pre className="hljs debut-SyntaxHighlight">
-        <code children={this.highlight(this.props.children as AcceptedChildren, this.props.language)} />
+        <code
+          children={this.highlight(
+            this.props.children as AcceptedChildren,
+            this.props.language,
+          )}
+        />
       </pre>
     );
   }

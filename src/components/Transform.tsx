@@ -14,16 +14,21 @@ function numberToPixels(number: string | number): string {
   return number;
 }
 
-function transformStyle({ x, y }: { x: string | number, y: string | number }) {
+function transformStyle({ x, y }: { x: string | number; y: string | number }) {
   return `translate(${numberToPixels(x)}, ${numberToPixels(y)})`;
 }
 
-function move ({ x, y }: { x?: number | string, y?: number | string }) {
+function move({ x, y }: { x?: number | string; y?: number | string }) {
   return (state: Props) => ({ ...state, x, y });
 }
 
-function Transform({ x = 0, y = 0, style = { }, ...passThrough}: Props) {
-  return <div style={{...style, transform: transformStyle({ x, y })}} {...passThrough}/>
-};
+function Transform({ x = 0, y = 0, style = {}, ...passThrough }: Props) {
+  return (
+    <div
+      style={{ ...style, transform: transformStyle({ x, y }) }}
+      {...passThrough}
+    />
+  );
+}
 
 export default Object.assign(Transform, { move });

@@ -3,10 +3,13 @@ import { Subscription } from 'rxjs/Subscription';
 import { Component } from './component';
 
 export type Props<P> = {
-  component: Component<P>,
+  component: Component<P>;
 };
 
-export default class ViewComponent<P> extends React.Component<Props<P>, { componentState: P }> {
+export default class ViewComponent<P> extends React.Component<
+  Props<P>,
+  { componentState: P }
+> {
   private subscription: Subscription | null = null;
 
   constructor(props: Props<P>) {
@@ -17,7 +20,9 @@ export default class ViewComponent<P> extends React.Component<Props<P>, { compon
   }
 
   componentWillMount() {
-    this.subscription = this.props.component.state$.subscribe((componentState) => this.setState({ componentState }));
+    this.subscription = this.props.component.state$.subscribe(componentState =>
+      this.setState({ componentState }),
+    );
   }
 
   componentWillUnmount() {
@@ -29,14 +34,20 @@ export default class ViewComponent<P> extends React.Component<Props<P>, { compon
   render() {
     const Component = this.props.component.viewComponent;
 
-    const renderedChildren: React.ReactNode[] = this.props.component.children.map((component, index) => {
-      if (typeof component === 'string') {
-        return component;
-      }
+    const renderedChildren: React.ReactNode[] = this.props.component.children.map(
+      (component, index) => {
+        if (typeof component === 'string') {
+          return component;
+        }
 
-      return <ViewComponent component={component} key={index} />
-    });
+        return <ViewComponent component={component} key={index} />;
+      },
+    );
 
-    return React.createElement(Component, this.state.componentState, ...renderedChildren);
+    return React.createElement(
+      Component,
+      this.state.componentState,
+      ...renderedChildren,
+    );
   }
 }

@@ -7,11 +7,11 @@ import './Presentation.css';
 import ZoomToFit from './ZoomToFit';
 
 interface Props {
-  actions: ActionQueue,
-  root: Component<any>,
+  actions: ActionQueue;
+  root: Component<any>;
   size?: {
-    width: number,
-    height: number,
+    width: number;
+    height: number;
   };
 }
 
@@ -25,12 +25,20 @@ function handleKeyPress(actionQueue: ActionQueue) {
         actionQueue.goNextSafe();
         break;
     }
-  }
+  };
 }
 
-export default function Presentation({ actions, root, size = { width: 1600, height: 900 } }: Props) {
+export default function Presentation({
+  actions,
+  root,
+  size = { width: 1600, height: 900 },
+}: Props) {
   return (
-    <div tabIndex={0} className="debut-Presentation" onKeyDown={handleKeyPress(actions)}>
+    <div
+      tabIndex={0}
+      className="debut-Presentation"
+      onKeyDown={handleKeyPress(actions)}
+    >
       <ZoomToFit innerDimensions={size}>
         <div className="debut-Presentation__inner" style={size}>
           <ViewComponent component={root} />

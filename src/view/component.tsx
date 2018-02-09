@@ -6,7 +6,7 @@ export interface ComponentDefinition<P> {
   initialState: P;
   children?: AllComponents[];
   name?: string[];
-};
+}
 
 export interface Component<P> {
   state$: BehaviorSubject<P>;
@@ -21,7 +21,9 @@ export interface DebutComponentProps {
 
 export type AllComponents = Component<any> | string;
 
-export function createComponent<P>(definition: ComponentDefinition<P>): Component<P> {
+export function createComponent<P>(
+  definition: ComponentDefinition<P>,
+): Component<P> {
   return {
     state$: new BehaviorSubject(definition.initialState),
     viewComponent: definition.viewComponent,

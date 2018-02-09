@@ -3,10 +3,13 @@ import * as React from 'react';
 import ContainerDimensions, { Dimensions } from 'react-container-dimensions';
 
 type Props = {
-  innerDimensions: Dimensions,
-}
+  innerDimensions: Dimensions;
+};
 
-function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight }: Dimensions, { width: outerWidth, height: outerHeight }: Dimensions) {
+function dimensionsToScaleFactor(
+  { width: innerWidth, height: innerHeight }: Dimensions,
+  { width: outerWidth, height: outerHeight }: Dimensions,
+) {
   const innerAspect = innerWidth / innerHeight;
   const outerAspect = outerWidth / outerHeight;
 
@@ -20,11 +23,19 @@ function dimensionsToScaleFactor({ width: innerWidth, height: innerHeight }: Dim
 export default class ZoomToFit extends React.PureComponent<Props> {
   renderInside = (outerDimensions: Dimensions) => {
     return (
-      <div style={{transform: `scale(${dimensionsToScaleFactor(this.props.innerDimensions, outerDimensions)})`}} className="debut-ZoomToFit__toFit">
+      <div
+        style={{
+          transform: `scale(${dimensionsToScaleFactor(
+            this.props.innerDimensions,
+            outerDimensions,
+          )})`,
+        }}
+        className="debut-ZoomToFit__toFit"
+      >
         {this.props.children}
       </div>
-    )
-  }
+    );
+  };
 
   render() {
     return (

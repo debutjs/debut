@@ -8,7 +8,6 @@
  - [Git](https://git-scm.com/)
  - [NodeJS](https://nodejs.org/en/) `> v6.10.0`
  - [Yarn](https://yarnpkg.com/en/)
- - (Optional: for rebuilding examples) [Babel](https://babeljs.io/)
 
 ## Building
 
@@ -31,3 +30,11 @@ yarn build:examples
 
 If you wish to commit an example, make sure to commit its transpiled form as
 well!
+
+## Before making a PR
+
+Run prettier to make sure your code follows our style guide:
+
+```bash
+yarn pretty
+```

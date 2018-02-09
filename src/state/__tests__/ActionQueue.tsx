@@ -1,17 +1,20 @@
 import * as React from 'react';
 
-import ActionQueue, { ActionQueueOutOfBoundsError, createActionHistoryItem } from '../ActionQueue';
+import ActionQueue, {
+  ActionQueueOutOfBoundsError,
+  createActionHistoryItem,
+} from '../ActionQueue';
 import { createComponent } from 'src/view/component';
 
 function createActionQueueAndComponent() {
   const component = createComponent({
-    viewComponent: () => (<div>Hello</div>),
-    initialState: { x: 5, y: 5 }
+    viewComponent: () => <div>Hello</div>,
+    initialState: { x: 5, y: 5 },
   });
 
   const actionQueue = new ActionQueue([
-    [ { state$: component.state$, reducer: ({ x, y }) => ({ x: x + 1, y }) } ],
-    [ { state$: component.state$, reducer: ({ x, y }) => ({ x, y: y - 1 }) } ],
+    [{ state$: component.state$, reducer: ({ x, y }) => ({ x: x + 1, y }) }],
+    [{ state$: component.state$, reducer: ({ x, y }) => ({ x, y: y - 1 }) }],
   ]);
 
   return { component, actionQueue };
@@ -50,7 +53,7 @@ describe('ActionQueue', () => {
     actionQueue.goNext();
     actionQueue.goNext();
 
-    expect(() => {  
+    expect(() => {
       actionQueue.goNext();
     }).toThrowError();
   });

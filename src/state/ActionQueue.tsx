@@ -2,26 +2,30 @@ import { Component, pushStateToComponent } from 'src/view/component';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 export interface StateReducer<P> {
-  state$: BehaviorSubject<P>,
-  reducer: (oldState: P) => P,
+  state$: BehaviorSubject<P>;
+  reducer: (oldState: P) => P;
 }
 
 export type Action = StateReducer<any>[];
 
 interface ActionHistoryItem<P> {
-  state$: BehaviorSubject<P>,
-  oldState: P,
-};
+  state$: BehaviorSubject<P>;
+  oldState: P;
+}
 
 type ActionHistory = ActionHistoryItem<any>[];
 
-export class ActionQueueOutOfBoundsError extends Error { }
+export class ActionQueueOutOfBoundsError extends Error {}
 
-export function createStateReducer<P>(stateReducer: StateReducer<P>): StateReducer<P> {
+export function createStateReducer<P>(
+  stateReducer: StateReducer<P>,
+): StateReducer<P> {
   return stateReducer;
 }
 
-export function createActionHistoryItem<P>(actionHistoryItem: ActionHistoryItem<P>) : ActionHistoryItem<P> {
+export function createActionHistoryItem<P>(
+  actionHistoryItem: ActionHistoryItem<P>,
+): ActionHistoryItem<P> {
   return actionHistoryItem;
 }
 
@@ -43,11 +47,14 @@ export default class ActionQueue {
    * Go to a particular action index
    */
   goTo(actionIndex: number) {
-    while ((this.actionIndex < actionIndex) && (this.actionIndex < this.actions.length)) {
+    while (
+      this.actionIndex < actionIndex &&
+      this.actionIndex < this.actions.length
+    ) {
       this.goNext();
     }
 
-    while ((this.actionIndex > actionIndex) && (this.actionIndex > 0)) {
+    while (this.actionIndex > actionIndex && this.actionIndex > 0) {
       this.goPrevious();
     }
   }
@@ -60,10 +67,12 @@ export default class ActionQueue {
     }
 
     this.actionHistory.push(
-      action.map(({ state$ }) => ({ state$, oldState: state$.getValue() }))
+      action.map(({ state$ }) => ({ state$, oldState: state$.getValue() })),
     );
 
-    action.forEach(({ state$, reducer }) => state$.next(reducer(state$.getValue())));
+    action.forEach(({ state$, reducer }) =>
+      state$.next(reducer(state$.getValue())),
+    );
 
     this.actionIndex += 1;
 
@@ -108,4 +117,3 @@ export default class ActionQueue {
     this.changes.next(this.actionIndex);
   }
 }
-

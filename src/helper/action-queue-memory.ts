@@ -11,7 +11,7 @@ export function createActionQueueWithMemory(actions: Action[]) {
   if (window.localStorage) {
     const testItem = window.localStorage.getItem(ACTION_SAVE_KEY);
 
-    if ((testItem != null) && (!isNaN(parseInt(testItem)))) {
+    if (testItem != null && !isNaN(parseInt(testItem))) {
       initialIndex = parseInt(testItem);
     }
   }
@@ -20,7 +20,11 @@ export function createActionQueueWithMemory(actions: Action[]) {
 
   actionQueue.goTo(initialIndex);
 
-  actionQueue.observe().subscribe(index => window.localStorage.setItem(ACTION_SAVE_KEY, `${index}`));
+  actionQueue
+    .observe()
+    .subscribe(index =>
+      window.localStorage.setItem(ACTION_SAVE_KEY, `${index}`),
+    );
 
   return actionQueue;
 }
