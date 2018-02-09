@@ -35,4 +35,3 @@ var actions = debut.actionsForComponent(component, function (action) {
 });
 
 ReactDOM.render(React.createElement(debut.Presentation, { actions: actions, root: component }), document.getElementById('root'));
-

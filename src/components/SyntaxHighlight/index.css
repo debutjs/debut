@@ -1,0 +1,5 @@
+.debut-SyntaxHighlight.debut-SyntaxHighlight {
+  /* Increased specificity to override .hljs styles */
+  overflow: visible;
+  white-space: pre-wrap;
+}

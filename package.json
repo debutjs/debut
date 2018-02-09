@@ -4,6 +4,7 @@
   "scripts": {
     "build": "webpack",
     "build:prod": "webpack -p",
+    "build:examples": "yarn babel examples -- --out-dir examples --only '*.jsx'",
     "watch": "webpack -w",
     "test": "jest",
     "publish-please": "publish-please"
@@ -19,6 +20,7 @@
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
     "autoprefixer": "^7.2.5",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -26,9 +28,12 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.28.9",
     "extract-text-webpack-plugin": "^3.0.2",
+    "highlight.js": "^9.12.0",
     "jest": "^22.1.4",
     "postcss-loader": "^2.1.0",
     "publish-please": "^2.3.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "style-loader": "^0.20.1",
     "ts-loader": "^3.4.0",
     "typescript": "^2.7.1",
@@ -51,6 +56,7 @@
     ]
   },
   "dependencies": {
+    "lowlight": "^1.9.1",
     "react-container-dimensions": "^1.3.3",
     "rxjs": "^5.5.6"
   }

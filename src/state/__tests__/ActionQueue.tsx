@@ -52,7 +52,7 @@ describe('ActionQueue', () => {
 
     expect(() => {  
       actionQueue.goNext();
-    }).toThrowError(ActionQueueOutOfBoundsError);
+    }).toThrowError();
   });
 
   it('throws exceptions when it reverses too far', () => {
@@ -60,6 +60,6 @@ describe('ActionQueue', () => {
 
     expect(() => {
       actionQueue.goPrevious();
-    }).toThrowError(ActionQueueOutOfBoundsError);
+    }).toThrowError();
   });
 });
