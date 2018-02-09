@@ -1,28 +1,22 @@
-import { highlight } from 'lowlight';
+import { highlight, lowlight } from 'lowlight';
 import * as React from 'react';
 
 import {
   AcceptedChildren,
+  ComponentWithRange,
   extractRangesAndTextFromReactComponents,
   stringifyReactComponents,
-  ComponentWithRange,
+  ExtractedRanges,
 } from './react-to-ranges';
 import {
   getRangeFromParsedAsts,
   lowlightAstToReactComponent,
 } from './parse-highlight';
 
-export function highlightReactComponents(
-  components: AcceptedChildren,
-  language: string,
+export function reconcileRangesWithHighlightedAst(
+  componentRanges: ExtractedRanges,
+  highlightedAst: lowlight.HighlightResult,
 ): React.ReactNode[] {
-  if (components == null) {
-    return [];
-  }
-
-  const componentRanges = extractRangesAndTextFromReactComponents(components);
-  const highlightedAst = highlight(language, componentRanges.text);
-
   let currentStart = 0;
 
   function interpretRanges(

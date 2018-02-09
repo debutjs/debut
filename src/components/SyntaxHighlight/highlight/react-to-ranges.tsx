@@ -4,7 +4,7 @@ export interface ComponentWithRange {
   children: (ComponentWithRange | number)[];
 }
 
-interface ExtractedRanges {
+export interface ExtractedRanges {
   text: string;
   ranges: (ComponentWithRange | number)[];
 }
