@@ -8,9 +8,11 @@ export function findComponents(
     return [];
   }
 
-  let components = component.name.includes(name) ? [component] : [];
+  const components = component.props.name.includes(name) ? [component] : [];
 
   return components.concat(
-    ...component.children.map(component => findComponents(component, name)),
+    ...component.props.children.map(component =>
+      findComponents(component, name),
+    ),
   );
 }

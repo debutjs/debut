@@ -53,7 +53,10 @@ function action<P extends object>(
   components: Component<P>[],
   reducer: (old: P) => P,
 ): Action {
-  return components.map(component => ({ state$: component.state$, reducer }));
+  return components.map(component => ({
+    state$: component.props.state$,
+    reducer,
+  }));
 }
 
 type CreateActionHelper = (

@@ -41,7 +41,7 @@ export default function Presentation({
     >
       <ZoomToFit innerDimensions={size}>
         <div className="debut-Presentation__inner" style={size}>
-          <ViewComponent component={root} />
+          {root}
         </div>
       </ZoomToFit>
     </div>

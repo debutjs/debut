@@ -1,26 +1,22 @@
 import React from 'react';
 import { Subscription } from 'rxjs/Subscription';
-import { Component } from './component';
-
-export type Props<P> = {
-  component: Component<P>;
-};
+import { Component, ComponentProps } from './component';
 
 export default class ViewComponent<P> extends React.Component<
-  Props<P>,
+  ComponentProps<P>,
   { componentState: P }
 > {
   private subscription: Subscription | null = null;
 
-  constructor(props: Props<P>) {
+  constructor(props: ComponentProps<P>) {
     super(props);
     this.state = {
-      componentState: props.component.state$.getValue(),
+      componentState: props.state$.getValue(),
     };
   }
 
   componentWillMount() {
-    this.subscription = this.props.component.state$.subscribe(componentState =>
+    this.subscription = this.props.state$.subscribe(componentState =>
       this.setState({ componentState }),
     );
   }
@@ -32,22 +28,10 @@ export default class ViewComponent<P> extends React.Component<
   }
 
   render() {
-    const Component = this.props.component.viewComponent;
-
-    const renderedChildren: React.ReactNode[] = this.props.component.children.map(
-      (component, index) => {
-        if (typeof component === 'string') {
-          return component;
-        }
-
-        return <ViewComponent component={component} key={index} />;
-      },
-    );
-
     return React.createElement(
-      Component,
+      this.props.viewComponent,
       this.state.componentState,
-      ...renderedChildren,
+      ...this.props.children,
     );
   }
 }

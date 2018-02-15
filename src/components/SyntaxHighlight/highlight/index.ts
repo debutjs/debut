@@ -49,6 +49,7 @@ export function createHighlighter() {
   return (children: AcceptedChildren, language: string) => {
     if (!currentHighlight || currentHighlight.forChildren !== children) {
       const ranges = extractRangesAndTextFromReactComponents(children);
+
       currentHighlight = {
         forChildren: children,
         node: reconcileRangesWithHighlightedAst(

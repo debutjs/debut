@@ -12,12 +12,7 @@ class Example extends React.Component {
     return (
       <debut.SyntaxHighlight language="js">
         {debut.SyntaxHighlight.format(f => [
-          f`${<span style={{ display: 'inline-block', transform: this.state.done ? 'translatey(-20px)' : 'none' }}>
-            "use <span style={{ display: 'inline-block', transform: 'translateY(20px)' }}>str</span>ict"
-          </span>};`,
-          f`function ${this.state.done ? 'peep' : 'deep'}() {`,
-          f`  peep("yes");`,
-          f`}`,
+          f`"use strict";`,
         ])}
       </debut.SyntaxHighlight>
     )

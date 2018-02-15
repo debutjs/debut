@@ -13,8 +13,18 @@ function createActionQueueAndComponent() {
   });
 
   const actionQueue = new ActionQueue([
-    [{ state$: component.state$, reducer: ({ x, y }) => ({ x: x + 1, y }) }],
-    [{ state$: component.state$, reducer: ({ x, y }) => ({ x, y: y - 1 }) }],
+    [
+      {
+        state$: component.props.state$,
+        reducer: ({ x, y }) => ({ x: x + 1, y }),
+      },
+    ],
+    [
+      {
+        state$: component.props.state$,
+        reducer: ({ x, y }) => ({ x, y: y - 1 }),
+      },
+    ],
   ]);
 
   return { component, actionQueue };
@@ -26,11 +36,11 @@ describe('ActionQueue', () => {
 
     actionQueue.goNext();
 
-    expect(component.state$.getValue()).toEqual({ x: 6, y: 5 });
+    expect(component.props.state$.getValue()).toEqual({ x: 6, y: 5 });
 
     actionQueue.goNext();
 
-    expect(component.state$.getValue()).toEqual({ x: 6, y: 4 });
+    expect(component.props.state$.getValue()).toEqual({ x: 6, y: 4 });
   });
 
   it('reverses correctly', () => {
@@ -40,11 +50,11 @@ describe('ActionQueue', () => {
     actionQueue.goNext();
     actionQueue.goPrevious();
 
-    expect(component.state$.getValue()).toEqual({ x: 6, y: 5 });
+    expect(component.props.state$.getValue()).toEqual({ x: 6, y: 5 });
 
     actionQueue.goPrevious();
 
-    expect(component.state$.getValue()).toEqual({ x: 5, y: 5 });
+    expect(component.props.state$.getValue()).toEqual({ x: 5, y: 5 });
   });
 
   it('throws exceptions when it proceeds too far', () => {
